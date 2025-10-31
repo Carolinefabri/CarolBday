@@ -281,7 +281,7 @@
                 <span style="margin-left: 10px; color: #e0e0e0;">Caroline Bday</span>
             </div>
             <button class="lang-toggle" onclick="toggleLanguage()">
-                 <span id="langText">English</span>
+                 <span id="langText">🇧🇷 Português</span>
             </button>
         </div>
 
@@ -291,18 +291,18 @@
             <div class="code-block">
                 <span class="comment" id="commentTodo">// TODO: Celebrate another successful year</span><br>
                 <span class="keyword">function</span> <span class="function" id="funcName">celebrarAniversario</span>() {<br>
-                &nbsp;&nbsp;<span class="keyword">const</span> age = age + <span class="number">1</span>; <span class="comment" id="commentLevel">// level up!</span><br>
-                &nbsp;&nbsp;<span class="keyword">const</span> GoodFood = Math.max();<br>
-                &nbsp;&nbsp;<span class="keyword">const</span> friends = [...<span id="allYou">todosVoces</span>];<br>
+                  <span class="keyword">const</span> age = age + <span class="number">1</span>; <span class="comment" id="commentLevel">// level up!</span><br>
+                  <span class="keyword">const</span> GoodFood = Math.max();<br>
+                  <span class="keyword">const</span> friends = [...<span id="allYou">todosVoces</span>];<br>
                 <br>
-                &nbsp;&nbsp;<span class="keyword">return</span> <span class="string" id="partyTime">"GET TOGETHER TIME! 🎉"</span>;<br>
+                  <span class="keyword">return</span> <span class="string" id="partyTime">"GET TOGETHER TIME! 🎉"</span>;<br>
                 }<br>
                 <br>
                 <span class="comment">/* </span><br>
-                <span class="comment" id="commitMsg">&nbsp;* COMMIT: Mais um ano no repositório da vida</span><br>
-                <span class="comment">&nbsp;* Branch: .....</span><br>
-                <span class="comment" id="statusMsg">&nbsp;* Status: Precisa de mais cerveja 🍺</span><br>
-                <span class="comment">&nbsp;*/</span>
+                <span class="comment" id="commitMsg"> * COMMIT: Mais um ano no repositório da vida</span><br>
+                <span class="comment"> * Branch: .....</span><br>
+                <span class="comment" id="statusMsg"> * Status: Precisa de mais cerveja 🍺</span><br>
+                <span class="comment"> */</span>
             </div>
 
             <div class="info-section">
@@ -355,6 +355,7 @@
     </div>
 
     <script>
+        // Iniciar em Português
         let currentLang = 'pt';
 
         function sendWhatsAppConfirmation() {
@@ -392,22 +393,21 @@
 
         const translations = {
             pt: {
-                langText: 'English',
+                langText: '🇬🇧 English',
                 title: '🎉 BIRTHDAY RELEASE v2025.0 🎉',
-                commentTodo: '// TODO: Celebrate another successful year',
+                commentTodo: '// TODO: Celebrar mais um ano de sucesso',
                 funcName: 'celebrarAniversario',
                 commentLevel: '// level up!',
                 allYou: 'todosVoces',
                 partyTime: '"GET TOGETHER TIME! 🎉"',
-                commitMsg: '&nbsp;* COMMIT: Mais um ano no repositório da vida',
-                statusMsg: '&nbsp;* Status: Precisa de mais cerveja 🍺',
+                commitMsg: ' * COMMIT: Mais um ano no repositório da vida',
+                statusMsg: ' * Status: Precisa de mais cerveja 🍺',
                 celebrating: 'CELEBRANDO MAIS UM DEPLOY DE SUCESSO NA TIMELINE DA VIDA!',
                 bugsFixed: 'Bugs resolvidos, features implementadas, e muita cafeína consumida!',
                 releaseDate: 'Data de Release:',
                 prodEnv: 'Ambiente de Produção:',
                 mapsBtn: '📍 Abrir no Google Maps',
                 confirmTitle: '⚡ CONFIRME SUA PRESENÇA',
-                attendLabel: '📋 Você vai comparecer?',
                 optionYes: '✅ Sim, estarei lá! (Commit confirmado)',
                 optionNo: '❌ Não poderei ir (Rollback necessário)',
                 whatsappBtn: '💬 Confirmar via WhatsApp',
@@ -415,22 +415,21 @@
                 noBugs: '// Eu não estou ficando velha, estou apenas atualizando minha versão'
             },
             en: {
-                langText: 'Português',
+                langText: '🇧🇷 Português',
                 title: '🎉 BIRTHDAY RELEASE v2025.0 🎉',
                 commentTodo: '// TODO: Celebrate another successful year',
                 funcName: 'celebrateBirthday',
                 commentLevel: '// level up!',
                 allYou: 'allOfYou',
                 partyTime: '"GET TOGETHER TIME! 🎉"',
-                commitMsg: '&nbsp;* COMMIT: Applying experience (and wrinkle) patch',
-                statusMsg: '&nbsp;* Status: NEEDS MORE BEER 🍺',
+                commitMsg: ' * COMMIT: Another year in life\'s repository',
+                statusMsg: ' * Status: NEEDS MORE BEER 🍺',
                 celebrating: 'CELEBRATING ANOTHER SUCCESSFUL DEPLOY IN LIFE\'S TIMELINE!',
                 bugsFixed: 'Bugs fixed, features shipped, and lots of caffeine consumed!',
                 releaseDate: 'Release Date:',
                 prodEnv: 'Production Environment:',
                 mapsBtn: '📍 Open in Google Maps',
                 confirmTitle: '⚡ CONFIRM YOUR ATTENDANCE',
-                attendLabel: '📋 Will you attend?',
                 optionYes: '✅ Yes, I\'ll be there! (Commit confirmed)',
                 optionNo: '❌ Can\'t make it (Rollback needed)',
                 whatsappBtn: '💬 Confirm via WhatsApp',
@@ -439,14 +438,18 @@
             }
         };
 
+        // Função para alternar o idioma
         function toggleLanguage() {
+            // Alterna a variável de idioma
             currentLang = currentLang === 'pt' ? 'en' : 'pt';
             const lang = translations[currentLang];
 
+            // Percorre todas as chaves de tradução e atualiza o texto
             Object.keys(lang).forEach(key => {
                 const element = document.getElementById(key);
                 if (element) {
-                    if (key === 'commitMsg' || key === 'statusMsg') {
+                    // O `innerHTML` é usado para preservar a formatação de código no bloco de comentário (quebra de linha e espaços)
+                    if (key === 'commitMsg' || key === 'statusMsg' || key === 'commentTodo' || key === 'noBugs') {
                         element.innerHTML = lang[key];
                     } else {
                         element.textContent = lang[key];
@@ -454,6 +457,13 @@
                 }
             });
         }
+        
+        // Inicializa o idioma no carregamento
+        document.addEventListener('DOMContentLoaded', () => {
+             // Garante que o estado inicial (pt) é carregado
+            toggleLanguage(); 
+            toggleLanguage();
+        });
     </script>
 </body>
 </html>
