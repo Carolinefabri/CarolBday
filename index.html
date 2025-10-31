@@ -151,6 +151,7 @@
             transition: all 0.3s ease;
             margin: 10px 0;
             border: 2px solid #000000;
+            cursor: pointer;
         }
 
         .map-button:hover {
@@ -222,8 +223,6 @@
             cursor: pointer;
         }
 
-  
-
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -287,7 +286,7 @@
         </div>
 
         <div class="content">
-            <h1 id="title"> BIRTHDAY RELEASE v3.3 </h1>
+            <h1 id="title">🎉 BIRTHDAY RELEASE v2025.0 🎉</h1>
 
             <div class="code-block">
                 <span class="comment" id="commentTodo">// TODO: Celebrate another successful year</span><br>
@@ -296,13 +295,13 @@
                 &nbsp;&nbsp;<span class="keyword">const</span> GoodFood = Math.max();<br>
                 &nbsp;&nbsp;<span class="keyword">const</span> friends = [...<span id="allYou">todosVoces</span>];<br>
                 <br>
-                &nbsp;&nbsp;<span class="keyword">return</span> <span class="string" id="partyTime">GET TOGETHER TIME! 🎉"</span>;<br>
+                &nbsp;&nbsp;<span class="keyword">return</span> <span class="string" id="partyTime">"GET TOGETHER TIME! 🎉"</span>;<br>
                 }<br>
                 <br>
                 <span class="comment">/* </span><br>
-                <span class="comment" id="commitMsg">&nbsp;* COMMIT: Aplicando patch de experiência (e rugas)</span><br>
+                <span class="comment" id="commitMsg">&nbsp;* COMMIT: Mais um ano no repositório da vida</span><br>
                 <span class="comment">&nbsp;* Branch: .....</span><br>
-                <span class="comment" id="statusMsg">&nbsp;* Status: NEEDS MORE BEER 🍺</span><br>
+                <span class="comment" id="statusMsg">&nbsp;* Status: Precisa de mais cerveja 🍺</span><br>
                 <span class="comment">&nbsp;*/</span>
             </div>
 
@@ -328,17 +327,80 @@
                 </a>
             </div>
 
-
+             <div class="rsvp-form">
+                <h2 id="confirmTitle" style="color: #4ec9b0; margin-bottom: 20px;">⚡ CONFIRME SUA PRESENÇA</h2>
+                <div class="form-group">
+                    <label for="guestName" id="nameLabel">👤 Seu nome:</label>
+                    <input type="text" id="guestName" placeholder="Digite seu nome..." required>
+                </div>
+                <div class="form-group">
+                    <label id="attendLabel">📋 Você vai comparecer?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="yes" id="attendYes">
+                            <span id="optionYes">✅ Sim, estarei lá! (Commit confirmado)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="no" id="attendNo">
+                            <span id="optionNo">❌ Não poderei ir (Rollback necessário)</span>
+                        </label>
+                    </div>
+                </div>
+                <button onclick="sendWhatsAppConfirmation()" class="map-button" style="width: 100%; display: block; text-align: center; margin-top: 20px;">
+                    <span id="whatsappBtn">💬 Confirmar via WhatsApp</span>
+                </button>
+            </div>
 
             <div class="footer">
-                <p id="powered">💻 Powered by Caroline | Version 3.3</p>
-                <p class="comment" id="noBugs">// I'm not getting old, I'm just updating my version.</p>
+                <p id="powered">💻 Powered by Birthday.js | Version 3.3</p>
+                <p class="comment" id="noBugs">// Eu não estou ficando velho, estou apenas atualizando minha versão</p>
             </div>
         </div>
     </div>
 
     <script>
         let currentLang = 'pt';
+
+        function sendWhatsAppConfirmation() {
+            const name = document.getElementById('guestName').value.trim();
+            const attendance = document.querySelector('input[name="attendance"]:checked');
+
+            // Validações
+            if (!name) {
+                alert(currentLang === 'pt' ? 
+                    '⚠️ Por favor, preencha seu nome!' : 
+                    '⚠️ Please enter your name!');
+                return;
+            }
+
+            if (!attendance) {
+                alert(currentLang === 'pt' ? 
+                    '⚠️ Por favor, selecione se você vai comparecer!' : 
+                    '⚠️ Please select if you will attend!');
+                return;
+            }
+
+            // Montar mensagem
+            const isAttending = attendance.value === 'yes';
+            let message;
+
+            if (currentLang === 'pt') {
+                message = isAttending ?
+                    `🎉 Olá! Sou ${name} e CONFIRMO minha presença no seu aniversário dia 09/11 às 13h no Arabesque!\n\n✅ Commit confirmado! Nos vemos lá! 🎂` :
+                    `Olá! Sou ${name} e infelizmente NÃO poderei comparecer ao seu aniversário dia 09/11.\n\n❌ Rollback necessário, mas desejo tudo de melhor! 🎈`;
+            } else {
+                message = isAttending ?
+                    `🎉 Hi! I'm ${name} and I CONFIRM my presence at your birthday on 11/09 at 1pm at Arabesque!\n\n✅ Commit confirmed! See you there! 🎂` :
+                    `Hi! I'm ${name} and unfortunately I CANNOT attend your birthday on 11/09.\n\n❌ Rollback needed, but I wish you all the best! 🎈`;
+            }
+
+            // Seu número do WhatsApp
+            const phoneNumber = '4917478177885';
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            // Abrir WhatsApp
+            window.open(whatsappURL, '_blank');
+        }
 
         const translations = {
             pt: {
@@ -348,7 +410,7 @@
                 funcName: 'celebrarAniversario',
                 commentLevel: '// level up!',
                 allYou: 'todosVoces',
-                partyTime: 'GET TOGETHER TIME! 🎉"',
+                partyTime: '"GET TOGETHER TIME! 🎉"',
                 commitMsg: '&nbsp;* COMMIT: Mais um ano no repositório da vida',
                 statusMsg: '&nbsp;* Status: Precisa de mais cerveja 🍺',
                 celebrating: 'CELEBRANDO MAIS UM DEPLOY DE SUCESSO NA TIMELINE DA VIDA!',
@@ -356,7 +418,13 @@
                 releaseDate: 'Data de Release:',
                 prodEnv: 'Ambiente de Produção:',
                 mapsBtn: '📍 Abrir no Google Maps',
-                successText: '✨ Confirmação enviada com sucesso! Commit realizado! ✨',
+                confirmTitle: '⚡ CONFIRME SUA PRESENÇA',
+                nameLabel: '👤 Seu nome:',
+                attendLabel: '📋 Você vai comparecer?',
+                optionYes: '✅ Sim, estarei lá! (Commit confirmado)',
+                optionNo: '❌ Não poderei ir (Rollback necessário)',
+                whatsappBtn: '💬 Confirmar via WhatsApp',
+                namePlaceholder: 'Digite seu nome...',
                 powered: '💻 Powered by Birthday.js | Version 3.3',
                 noBugs: '// Eu não estou ficando velho, estou apenas atualizando minha versão'
             },
@@ -367,7 +435,7 @@
                 funcName: 'celebrateBirthday',
                 commentLevel: '// level up!',
                 allYou: 'allOfYou',
-                partyTime: 'GET TOGETHER TIME! 🎉"',
+                partyTime: '"GET TOGETHER TIME! 🎉"',
                 commitMsg: '&nbsp;* COMMIT: Applying experience (and wrinkle) patch',
                 statusMsg: '&nbsp;* Status: NEEDS MORE BEER 🍺',
                 celebrating: 'CELEBRATING ANOTHER SUCCESSFUL DEPLOY IN LIFE\'S TIMELINE!',
@@ -375,7 +443,13 @@
                 releaseDate: 'Release Date:',
                 prodEnv: 'Production Environment:',
                 mapsBtn: '📍 Open in Google Maps',
-                successText: '✨ Confirmation sent successfully! Commit done! ✨',
+                confirmTitle: '⚡ CONFIRM YOUR ATTENDANCE',
+                nameLabel: '👤 Your name:',
+                attendLabel: '📋 Will you attend?',
+                optionYes: '✅ Yes, I\'ll be there! (Commit confirmed)',
+                optionNo: '❌ Can\'t make it (Rollback needed)',
+                whatsappBtn: '💬 Confirm via WhatsApp',
+                namePlaceholder: 'Enter your name...',
                 powered: '💻 Powered by Birthday.js | Version 3.3',
                 noBugs: '// I am not getting old, I am just updating my version.'
             }
@@ -390,11 +464,13 @@
                 if (element) {
                     if (key === 'commitMsg' || key === 'statusMsg') {
                         element.innerHTML = lang[key];
+                    } else if (key === 'namePlaceholder') {
+                        document.getElementById('guestName').placeholder = lang[key];
                     } else {
                         element.textContent = lang[key];
                     }
                 }
-                            });
+            });
         }
     </script>
 </body>
