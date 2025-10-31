@@ -330,10 +330,6 @@
              <div class="rsvp-form">
                 <h2 id="confirmTitle" style="color: #4ec9b0; margin-bottom: 20px;">⚡ CONFIRME SUA PRESENÇA</h2>
                 <div class="form-group">
-                    <label for="guestName" id="nameLabel">👤 Seu nome:</label>
-                    <input type="text" id="guestName" placeholder="Digite seu nome..." required>
-                </div>
-                <div class="form-group">
                     <label id="attendLabel">📋 Você vai comparecer?</label>
                     <div class="radio-group">
                         <label class="radio-option">
@@ -362,17 +358,9 @@
         let currentLang = 'pt';
 
         function sendWhatsAppConfirmation() {
-            const name = document.getElementById('guestName').value.trim();
             const attendance = document.querySelector('input[name="attendance"]:checked');
 
-            // Validações
-            if (!name) {
-                alert(currentLang === 'pt' ? 
-                    '⚠️ Por favor, preencha seu nome!' : 
-                    '⚠️ Please enter your name!');
-                return;
-            }
-
+            // Validação
             if (!attendance) {
                 alert(currentLang === 'pt' ? 
                     '⚠️ Por favor, selecione se você vai comparecer!' : 
@@ -386,16 +374,16 @@
 
             if (currentLang === 'pt') {
                 message = isAttending ?
-                    `🎉 Olá! Sou ${name} e CONFIRMO minha presença no seu aniversário dia 09/11 às 13h no Arabesque!\n\n✅ Commit confirmado! Nos vemos lá! 🎂` :
-                    `Olá! Sou ${name} e infelizmente NÃO poderei comparecer ao seu aniversário dia 09/11.\n\n❌ Rollback necessário, mas desejo tudo de melhor! 🎈`;
+                    `🎉 Olá! CONFIRMO minha presença no seu aniversário dia 09/11 às 13h no Arabesque!\n\n✅ Commit confirmado! Nos vemos lá! 🎂` :
+                    `Olá! Infelizmente NÃO poderei comparecer ao seu aniversário dia 09/11.\n\n❌ Rollback necessário, mas desejo tudo de melhor! 🎈`;
             } else {
                 message = isAttending ?
-                    `🎉 Hi! I'm ${name} and I CONFIRM my presence at your birthday on 11/09 at 1pm at Arabesque!\n\n✅ Commit confirmed! See you there! 🎂` :
-                    `Hi! I'm ${name} and unfortunately I CANNOT attend your birthday on 11/09.\n\n❌ Rollback needed, but I wish you all the best! 🎈`;
+                    `🎉 Hi! I CONFIRM my presence at your birthday on 11/09 at 1pm at Arabesque!\n\n✅ Commit confirmed! See you there! 🎂` :
+                    `Hi! Unfortunately I CANNOT attend your birthday on 11/09.\n\n❌ Rollback needed, but I wish you all the best! 🎈`;
             }
 
-            // Seu número do WhatsApp
-            const phoneNumber = '4917478177886';
+            // Seu número do WhatsApp (formato internacional correto)
+            const phoneNumber = '491747817786';
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
             // Abrir WhatsApp
@@ -419,12 +407,10 @@
                 prodEnv: 'Ambiente de Produção:',
                 mapsBtn: '📍 Abrir no Google Maps',
                 confirmTitle: '⚡ CONFIRME SUA PRESENÇA',
-                nameLabel: '👤 Seu nome:',
                 attendLabel: '📋 Você vai comparecer?',
                 optionYes: '✅ Sim, estarei lá! (Commit confirmado)',
                 optionNo: '❌ Não poderei ir (Rollback necessário)',
                 whatsappBtn: '💬 Confirmar via WhatsApp',
-                namePlaceholder: 'Digite seu nome...',
                 powered: '💻 Powered by Birthday.js | Version 3.3',
                 noBugs: '// Eu não estou ficando velho, estou apenas atualizando minha versão'
             },
@@ -444,12 +430,10 @@
                 prodEnv: 'Production Environment:',
                 mapsBtn: '📍 Open in Google Maps',
                 confirmTitle: '⚡ CONFIRM YOUR ATTENDANCE',
-                nameLabel: '👤 Your name:',
                 attendLabel: '📋 Will you attend?',
                 optionYes: '✅ Yes, I\'ll be there! (Commit confirmed)',
                 optionNo: '❌ Can\'t make it (Rollback needed)',
                 whatsappBtn: '💬 Confirm via WhatsApp',
-                namePlaceholder: 'Enter your name...',
                 powered: '💻 Powered by Birthday.js | Version 3.3',
                 noBugs: '// I am not getting old, I am just updating my version.'
             }
@@ -464,8 +448,6 @@
                 if (element) {
                     if (key === 'commitMsg' || key === 'statusMsg') {
                         element.innerHTML = lang[key];
-                    } else if (key === 'namePlaceholder') {
-                        document.getElementById('guestName').placeholder = lang[key];
                     } else {
                         element.textContent = lang[key];
                     }
