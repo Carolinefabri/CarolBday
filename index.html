@@ -300,7 +300,6 @@
                 <br>
                 <span class="comment">/* </span><br>
                 <span class="comment" id="commitMsg"> * COMMIT: Mais um ano no repositório da vida</span><br>
-                <span class="comment"> * Branch: .....</span><br>
                 <span class="comment" id="statusMsg"> * Status: Precisa de mais cerveja 🍺</span><br>
                 <span class="comment"> */</span>
             </div>
@@ -334,11 +333,11 @@
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="radio" name="attendance" value="yes" id="attendYes">
-                            <span id="optionYes">✅ Sim, estarei lá! (Commit confirmado)</span>
+                            <span id="optionYes">✅ Sim, estarei lá!</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="attendance" value="no" id="attendNo">
-                            <span id="optionNo">❌ Não poderei ir (Rollback necessário)</span>
+                            <span id="optionNo">❌ Não poderei ir </span>
                         </label>
                     </div>
                 </div>
@@ -376,11 +375,11 @@
             if (currentLang === 'pt') {
                 message = isAttending ?
                     `🎉 Olá! CONFIRMO minha presença no seu aniversário dia 09/11 às 13h no Arabesque!\n\n✅ Commit confirmado! Nos vemos lá! 🎂` :
-                    `Olá! Infelizmente NÃO poderei comparecer ao seu aniversário dia 09/11.\n\n❌ Rollback necessário, mas desejo tudo de melhor! 🎈`;
+                    `Olá! Infelizmente NÃO poderei comparecer ao seu aniversário dia 09/11.\n\n❌  🎈`;
             } else {
                 message = isAttending ?
                     `🎉 Hi! I CONFIRM my presence at your birthday on 11/09 at 1pm at Arabesque!\n\n✅ Commit confirmed! See you there! 🎂` :
-                    `Hi! Unfortunately I CANNOT attend your birthday on 11/09.\n\n❌ Rollback needed, but I wish you all the best! 🎈`;
+                    `Hi! Unfortunately I CANNOT attend your birthday on 11/09.\n\n❌  🎈`;
             }
 
             // Seu número do WhatsApp (formato internacional correto)
@@ -408,8 +407,8 @@
                 prodEnv: 'Ambiente de Produção:',
                 mapsBtn: '📍 Abrir no Google Maps',
                 confirmTitle: '⚡ CONFIRME SUA PRESENÇA',
-                optionYes: '✅ Sim, estarei lá! (Commit confirmado)',
-                optionNo: '❌ Não poderei ir (Rollback necessário)',
+                optionYes: '✅ Sim, estarei lá!',
+                optionNo: '❌ Não poderei ir',
                 whatsappBtn: '💬 Confirmar via WhatsApp',
                 powered: '💻 Powered by Caroline | Version 3.3',
                 noBugs: '// Eu não estou ficando velha, estou apenas atualizando minha versão'
@@ -430,8 +429,8 @@
                 prodEnv: 'Production Environment:',
                 mapsBtn: '📍 Open in Google Maps',
                 confirmTitle: '⚡ CONFIRM YOUR ATTENDANCE',
-                optionYes: '✅ Yes, I\'ll be there! (Commit confirmed)',
-                optionNo: '❌ Can\'t make it (Rollback needed)',
+                optionYes: '✅ Yes, I\'ll be there! ',
+                optionNo: '❌ Can\'t make it ',
                 whatsappBtn: '💬 Confirm via WhatsApp',
                 powered: '💻 Powered by Caroline | Version 3.3',
                 noBugs: '// I am not getting old, I am just updating my version.'
