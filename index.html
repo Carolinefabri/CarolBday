@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Deploy 🎂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #323233;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .terminal-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27c93f; }
+
+        .lang-toggle {
+            background: #34176e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-toggle:hover {
+            background: #1b0339;
+            transform: scale(1.05);
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #9356de;
+            overflow-x: auto;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .function {
+            color: #dcdcaa;
+        }
+
+        .keyword {
+            color: #c586c0;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .number {
+            color: #b5cea8;
+        }
+
+        h1 {
+            color: #9356de;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2d0746;
+            font-size: 1.4em;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .info-section {
+            background: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+        }
+
+        .map-button {
+            display: inline-block;
+            background: #380d6d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+            border: 2px solid #000000;
+        }
+
+        .map-button:hover {
+            background: #1d074b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .rsvp-form {
+            background: #2d2d2d;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            color: #4ec9b0;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: #1e1e1e;
+            border: 2px solid #3e3e42;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2e0b5c;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #1e1e1e;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover {
+            background: #252526;
+            transform: translateX(5px);
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+  
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            .code-block {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+
+            .info-line {
+                font-size: 1em;
+            }
+
+            .terminal-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .lang-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-left">
+                <div class="terminal-btn btn-close"></div>
+                <div class="terminal-btn btn-minimize"></div>
+                <div class="terminal-btn btn-maximize"></div>
+                <span style="margin-left: 10px; color: #e0e0e0;">Caroline Bday</span>
+            </div>
+            <button class="lang-toggle" onclick="toggleLanguage()">
+                 <span id="langText">English</span>
+            </button>
+        </div>
+
+        <div class="content">
+            <h1 id="title"> BIRTHDAY RELEASE v3.3 </h1>
+
+            <div class="code-block">
+                <span class="comment" id="commentTodo">// TODO: Celebrate another successful year</span><br>
+                <span class="keyword">function</span> <span class="function" id="funcName">celebrarAniversario</span>() {<br>
+                &nbsp;&nbsp;<span class="keyword">const</span> age = age + <span class="number">1</span>; <span class="comment" id="commentLevel">// level up!</span><br>
+                &nbsp;&nbsp;<span class="keyword">const</span> GoodFood = Math.max();<br>
+                &nbsp;&nbsp;<span class="keyword">const</span> friends = [...<span id="allYou">todosVoces</span>];<br>
+                <br>
+                &nbsp;&nbsp;<span class="keyword">return</span> <span class="string" id="partyTime">GET TOGETHER TIME! 🎉"</span>;<br>
+                }<br>
+                <br>
+                <span class="comment">/* </span><br>
+                <span class="comment" id="commitMsg">&nbsp;* COMMIT: Aplicando patch de experiência (e rugas)</span><br>
+                <span class="comment">&nbsp;* Branch: .....</span><br>
+                <span class="comment" id="statusMsg">&nbsp;* Status: NEEDS MORE BEER 🍺</span><br>
+                <span class="comment">&nbsp;*/</span>
+            </div>
+
+            <div class="info-section">
+                <div class="info-line">
+                    <span class="emoji">⚡</span>
+                    <strong id="celebrating">CELEBRANDO MAIS UM DEPLOY DE SUCESSO NA TIMELINE DA VIDA!</strong>
+                </div>
+                <div class="info-line">
+                    <span class="emoji">🐛</span>
+                    <span id="bugsFixed">Bugs resolvidos, features implementadas, e muita cafeína consumida!</span>
+                </div>
+                <div class="info-line">
+                    <span class="emoji">📅</span>
+                    <strong id="releaseDate">Data de Release:</strong> 09/11/2024 às 13:00h
+                </div>
+                <div class="info-line">
+                    <span class="emoji">📍</span>
+                    <strong id="prodEnv">Ambiente de Produção:</strong> Arabesque - Rellinghauser Straße
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Arabesque+Rellinghauser+Str.+117" target="_blank" class="map-button">
+                    <span id="mapsBtn">📍 Abrir no Google Maps</span>
+                </a>
+            </div>
+
+
+
+            <div class="footer">
+                <p id="powered">💻 Powered by Caroline | Version 3.3</p>
+                <p class="comment" id="noBugs">// I'm not getting old, I'm just updating my version.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'pt';
+
+        const translations = {
+            pt: {
+                langText: 'English',
+                title: '🎉 BIRTHDAY RELEASE v2025.0 🎉',
+                commentTodo: '// TODO: Celebrate another successful year',
+                funcName: 'celebrarAniversario',
+                commentLevel: '// level up!',
+                allYou: 'todosVoces',
+                partyTime: 'GET TOGETHER TIME! 🎉"',
+                commitMsg: '&nbsp;* COMMIT: Mais um ano no repositório da vida',
+                statusMsg: '&nbsp;* Status: Precisa de mais cerveja 🍺',
+                celebrating: 'CELEBRANDO MAIS UM DEPLOY DE SUCESSO NA TIMELINE DA VIDA!',
+                bugsFixed: 'Bugs resolvidos, features implementadas, e muita cafeína consumida!',
+                releaseDate: 'Data de Release:',
+                prodEnv: 'Ambiente de Produção:',
+                mapsBtn: '📍 Abrir no Google Maps',
+                successText: '✨ Confirmação enviada com sucesso! Commit realizado! ✨',
+                powered: '💻 Powered by Birthday.js | Version 3.3',
+                noBugs: '// Eu não estou ficando velho, estou apenas atualizando minha versão'
+            },
+            en: {
+                langText: 'Português',
+                title: '🎉 BIRTHDAY RELEASE v2025.0 🎉',
+                commentTodo: '// TODO: Celebrate another successful year',
+                funcName: 'celebrateBirthday',
+                commentLevel: '// level up!',
+                allYou: 'allOfYou',
+                partyTime: 'GET TOGETHER TIME! 🎉"',
+                commitMsg: '&nbsp;* COMMIT: Applying experience (and wrinkle) patch',
+                statusMsg: '&nbsp;* Status: NEEDS MORE BEER 🍺',
+                celebrating: 'CELEBRATING ANOTHER SUCCESSFUL DEPLOY IN LIFE\'S TIMELINE!',
+                bugsFixed: 'Bugs fixed, features shipped, and lots of caffeine consumed!',
+                releaseDate: 'Release Date:',
+                prodEnv: 'Production Environment:',
+                mapsBtn: '📍 Open in Google Maps',
+                successText: '✨ Confirmation sent successfully! Commit done! ✨',
+                powered: '💻 Powered by Birthday.js | Version 3.3',
+                noBugs: '// I am not getting old, I am just updating my version.'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            const lang = translations[currentLang];
+
+            Object.keys(lang).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (key === 'commitMsg' || key === 'statusMsg') {
+                        element.innerHTML = lang[key];
+                    } else {
+                        element.textContent = lang[key];
+                    }
+                }
+                            });
+        }
+    </script>
+</body>
+</html>
